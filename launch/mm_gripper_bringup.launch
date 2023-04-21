@@ -1,0 +1,12 @@
+<launch>
+	<!-- <arg name="device" 	default="/dev/ttyUSBgripper"/> -->
+	<arg name="device" 	default="/dev/ttyUSB1"/>
+	   <node name="gripper_action_server" pkg="robotiq_2f_gripper_control" type="gripper_action_server.py" output="screen">
+	   </node>
+	 <!--Start node gripper action client-->
+	   <node name="gripper_action_client" pkg="robotiq_2f_gripper_control" type="gripper_action_client.py" output="screen">
+	   </node>
+	<node name="robotiq_2f_gripper_connect" pkg="robotiq_2f_gripper_control" type="Robotiq2FGripperRtuNode.py" args="$(arg device)"/>
+	<node name="robotiq_2f_gripper_control" pkg="robotiq_2f_gripper_control" type="robotiq_2f_gripper_ctrl_gui.py" output="screen"/>
+
+</launch>
